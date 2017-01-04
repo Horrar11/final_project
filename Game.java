@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Game{
     private static Map map = new Map(10, 20);
     public static void main(String[]args){
-		//Map map = new Map(10, 20);
 		boolean alive = true;
 		
 		while(alive){

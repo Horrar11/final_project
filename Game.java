@@ -1,23 +1,27 @@
 import java.util.Scanner;
 
 public class Game{
-    private static Map map = new Map(10, 20);
+    //params for storage
+    private static Map map = new Map(20, 30);
+    private static boolean alive = true;
+
     public static void main(String[]args){
-		//Map map = new Map(10, 20);
-		boolean alive = true;
-		
 		while(alive){
 			game();
 		}
     }
+
+    private static void clearScreen(){
+	System.out.print("\033[2J\033[;H");
+    }
     
-    public static void game(){
-		System.out.println(map.display());
-		System.out.print("\tCommand:");
-		Scanner console = new Scanner(System.in);
-		String command = console.nextLine();
-		System.out.println("\n\n\n\n\n\n\n\n\n");
-		//map.interpret(command);
+    private static void game(){
+	clearScreen();
+	System.out.println(map.display());
+	System.out.print("\tCommand:");
+	Scanner console = new Scanner(System.in);
+	String command = console.nextLine();
+	map.interpret(command);
     }
 	
 	/**public static void genMap(int row, int col){

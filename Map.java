@@ -1,13 +1,16 @@
 public class Map{
     public char[][] grid;
-	private int playerPosX = 0;
-	private int playerPosY = 0;
+	private int playerPosX = 1;
+	private int playerPosY = 1;
 	
     public Map(int row, int col){
-		grid = new char[row][col];
+	grid = new char[row][col];
 	for(int i = 0;i < row;i++){
 	    for(int ind = 0;ind < col;ind++){
-		grid[i][ind] = 'X';
+		grid[i][ind] = ' ';
+		if(i == 0 || ind == 0 || i == row -1 || ind == col -1){
+		    grid[i][ind] = 'X';
+		}
 	    }
 	}
 	grid[playerPosX][playerPosY] = 'P';
@@ -33,29 +36,41 @@ public class Map{
 		return toRet;
 	}
 	
-	/**public void interpret(String arg) throws ArrayIndexOutOfBoundsException{
+	public void interpret(String arg) throws ArrayIndexOutOfBoundsException{
 		String given = arg;
 		switch(given) {
 			case "w":
-				if(playerPosY -- < 0){
-					System.out.println("Invalid movement");
-					break;
-				}
-				else{
-					playerPosY --;
-					grid[playerPosX][playerPosY] = 'P';
-				}
-			case "a":
-				if(playerPosX -- < 0){
-					System.out.println("Invalid movement");
-					break;
-				}
-				else{
+			        try{
 					playerPosX --;
 					grid[playerPosX][playerPosY] = 'P';
 				}
+				catch (ArrayIndexOutOfBoundsException e){
+					playerPosX ++;
+					System.out.println("\t\tMovement out of bounds!");
+				}
+			case "a":
+			        try{
+					playerPosY --;
+					grid[playerPosX][playerPosY] = 'P';
+				}
+				catch (ArrayIndexOutOfBoundsException e){
+					playerPosY ++;
+					System.out.println("\t\tMovement out of bounds!");
+				}
 			case "s":
 				try{
+					playerPosX ++;
+					grid[playerPosX][playerPosY] = 'P';
+				}
+				catch (ArrayIndexOutOfBoundsException e){
+					playerPosX --;
+					System.out.println("\t\tMovement out of bounds!");
+				}
+				finally{
+					
+				}
+			case "d":
+			        try{
 					playerPosY ++;
 					grid[playerPosX][playerPosY] = 'P';
 				}
@@ -63,20 +78,8 @@ public class Map{
 					playerPosY --;
 					System.out.println("\t\tMovement out of bounds!");
 				}
-				finally{
-					
-				}
-			case "d":
-				if(playerPosX ++ > grid[playerPosY].length){
-					System.out.println("Invalid movement");
-					break;
-				}
-				else{
-					playerPosX ++;
-					grid[playerPosX][playerPosY] = 'P';
-				}
 			default:
 				System.out.println("\tMap \n");
 		}
-	}**/
+	}
 }

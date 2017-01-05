@@ -29,21 +29,4 @@ public class Game{
     public static void setAlive(boolean val){
 	alive = val;
     }
-	/**public static void genMap(int row, int col){
-        for(int i = 0;i < map.length;i++){
-			for(int ind = 0;ind < map[i].length;ind++){
-				map[i][ind] = 'X';
-			}
-		}
-		map[0][0] = 'P';
-		}**/
-    
-    /**public String displayMap(){
-		for(int row = 0;row < map.length;row++){
-			for(int col = 0;col < map[row].length;col++){
-				System.out.print(map[row][col]);
-			}
-			System.out.println();
-	}
-    }**/
 }

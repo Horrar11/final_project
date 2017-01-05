@@ -13,8 +13,9 @@ public class Map{
 		}
 	    }
 	}
-	grid[playerPosX][playerPosY] = 'P';
+	setPlayerPos();
     }
+    public void setPlayerPos(){grid[playerPosX][playerPosY] = 'P';}
     public String toString(){
 		String toRet = "";
 		for(int row = 0;row < grid.length;row++){
@@ -25,61 +26,63 @@ public class Map{
 		}
 		return toRet;
     }
-	public String display(){
-		String toRet = "";
-		for(int i = 0; i < grid.length; i++){
-			for(int j = 0; j < grid[i].length; j++){
-				toRet += grid[i][j];
-			}
-			toRet += "\n";
-		}
-		return toRet;
+    public String display(){
+	String toRet = "";
+	for(int i = 0; i < grid.length; i++){
+	    for(int j = 0; j < grid[i].length; j++){
+		toRet += grid[i][j];
+	    }
+	    toRet += "\n";
 	}
-	
-	public void interpret(String arg) throws ArrayIndexOutOfBoundsException{
-		String given = arg;
-		switch(given) {
-			case "w":
-			        try{
-					playerPosX --;
-					grid[playerPosX][playerPosY] = 'P';
-				}
-				catch (ArrayIndexOutOfBoundsException e){
-					playerPosX ++;
-					System.out.println("\t\tMovement out of bounds!");
-				}
-			case "a":
-			        try{
-					playerPosY --;
-					grid[playerPosX][playerPosY] = 'P';
-				}
-				catch (ArrayIndexOutOfBoundsException e){
-					playerPosY ++;
-					System.out.println("\t\tMovement out of bounds!");
-				}
-			case "s":
-				try{
-					playerPosX ++;
-					grid[playerPosX][playerPosY] = 'P';
-				}
-				catch (ArrayIndexOutOfBoundsException e){
-					playerPosX --;
-					System.out.println("\t\tMovement out of bounds!");
-				}
-				finally{
-					
-				}
-			case "d":
-			        try{
-					playerPosY ++;
-					grid[playerPosX][playerPosY] = 'P';
-				}
-				catch (ArrayIndexOutOfBoundsException e){
-					playerPosY --;
-					System.out.println("\t\tMovement out of bounds!");
-				}
-			default:
-				System.out.println("\tMap \n");
-		}
+	return toRet;
+    }
+    public void moveOut(){
+	System.out.println("\t\t\tMovement was out of bounds!");
+    }
+    public void interpret(String arg) throws ArrayIndexOutOfBoundsException{
+	String given = arg;
+	switch(given){
+	case "w":
+	    try{
+		playerPosX --;
+		setPlayerPos();
+	    }
+	    catch (ArrayIndexOutOfBoundsException e){
+		playerPosX ++;
+		moveOut();
+	    }
+	case "a":
+	    try{
+		playerPosY --;
+		setPlayerPos();
+	    }
+	    catch (ArrayIndexOutOfBoundsException e){
+		playerPosY ++;
+		moveOut();
+	    }
+	case "s":
+	    try{
+		playerPosX ++;
+		setPlayerPos();
+	    }
+	    catch (ArrayIndexOutOfBoundsException e){
+		playerPosX --;
+		moveOut();
+	    }
+	    finally{
+		
+	    }
+	case "d":
+	    try{
+		playerPosY ++;
+		setPlayerPos();
+	    }
+	    catch (ArrayIndexOutOfBoundsException e){
+		playerPosY --;
+		moveOut();
+	    }
+	default:
+	    System.out.println("\tMap \n");
 	}
+    }
 }

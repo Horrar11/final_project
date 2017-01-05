@@ -11,10 +11,12 @@ public class Game{
 		}
     }
 
+    //clears the screen
     private static void clearScreen(){
 	System.out.print("\033[2J\033[;H");
     }
     
+    //heart of the game
     private static void game(){
 	System.out.println(map.display());
 	System.out.print("\tCommand:");
@@ -23,9 +25,12 @@ public class Game{
 	clearScreen();
 	map.interpret(command);
     }
+
+    //checks whether or not 
     public static boolean getAlive(){
 	return alive;
     }
+
     public static void setAlive(boolean val){
 	alive = val;
     }

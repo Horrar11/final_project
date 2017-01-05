@@ -36,7 +36,7 @@ public class Map{
 	}
 	return toRet;
     }
-    public void moveOut(){
+    public void mOOB(){
 	System.out.println("\t\t\tMovement was out of bounds!");
     }
     public void interpret(String arg) throws ArrayIndexOutOfBoundsException{
@@ -49,7 +49,7 @@ public class Map{
 	    }
 	    catch (ArrayIndexOutOfBoundsException e){
 		playerPosX ++;
-		moveOut();
+		mOOB();
 	    }
 	case "a":
 	    try{
@@ -58,7 +58,7 @@ public class Map{
 	    }
 	    catch (ArrayIndexOutOfBoundsException e){
 		playerPosY ++;
-		moveOut();
+		mOOB();
 	    }
 	case "s":
 	    try{
@@ -67,7 +67,7 @@ public class Map{
 	    }
 	    catch (ArrayIndexOutOfBoundsException e){
 		playerPosX --;
-		moveOut();
+		mOOB();
 	    }
 	    finally{
 		
@@ -79,7 +79,7 @@ public class Map{
 	    }
 	    catch (ArrayIndexOutOfBoundsException e){
 		playerPosY --;
-		moveOut();
+		mOOB();
 	    }
 	default:
 	    System.out.println("\tMap \n");

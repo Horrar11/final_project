@@ -1,32 +1,28 @@
-import java.util.Scanner;
-
 public class Game{
-    //params for storage
-    private static Map map = new Map(20, 30);
-    private static boolean alive = true;
+    private static Map map;
+    private static Enemy[] enemies;
+    private static Character player;
 
-    public static void main(String[]args){
-		while(alive){
-			game();
-		}
+    //default constructors
+    public Game(){
+	map = new Map();
+	player = new Character();
     }
 
-    private static void clearScreen(){
-	System.out.print("\033[2J\033[;H");
+    //checks if the player is alive or not
+    public boolean getAlive(){
+	return player.getAlive();
     }
-    
-    private static void game(){
-	System.out.println(map.display());
-	System.out.print("\tCommand:");
-	Scanner console = new Scanner(System.in);
-	String command = console.nextLine();
-	clearScreen();
-	map.interpret(command);
+
+    //not finished 
+    public void interpret(String command){
     }
-    public static boolean getAlive(){
-	return alive;
-    }
-    public static void setAlive(boolean val){
-	alive = val;
+
+
+    //should print out all the nessecary information
+    public String toString(){
+	String printOut = map.toString();
+	printOut += "/n/n";
+	return printOut;
     }
 }

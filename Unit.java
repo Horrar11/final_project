@@ -1,14 +1,16 @@
 public abstract class Unit{
-    private int hp;
-    private int atk;
-    private String weapon;
+    public double hp;
+    public int atk;
+	public int def;
+	public int xcor;
+	public int ycor;
 
     abstract void attack();
 
-    abstract boolean move();
+    abstract void move();
 
     public boolean getAlive(){
-	return hp > 0;
+	return hp >= 0;
     }
 
     public boolean takeDmg(int a){

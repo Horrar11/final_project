@@ -86,3 +86,14 @@ public class Map{
 	}
     }
 }
+
+
+
+
+import java.util.Random.*;
+
+	hp = (floorMulitiplier ** 2) * 100;
+	atk = 20;
+	Random rand = new Random();
+	int value = rand.nextInt(6);
+	def = floorMulitiplier * value;

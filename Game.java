@@ -1,39 +1,37 @@
-import java.util.Scanner;
-
 public class Game{
-    private static Map map = new Map(10, 20);
-    public static void main(String[]args){
-		boolean alive = true;
-		
-		while(alive){
-			game();
-		}
+    public static Map map;
+    public static Enemy[] enemies;
+    public static Character player;
+	//public static int floorMulitplier;
+
+    //default constructors
+    public Game(){
+	map = new Map(20, 30);
+	player = new Character();
     }
-    
-    public static void game(){
-		System.out.println(map.display());
-		System.out.print("\tCommand:");
-		Scanner console = new Scanner(System.in);
-		String command = console.nextLine();
-		System.out.println("\n\n\n\n\n\n\n\n\n");
-		//map.interpret(command);
+
+    //checks if the player is alive or not
+    public boolean getAlive(){
+	return player.getAlive();
     }
 	
-	/**public static void genMap(int row, int col){
-        for(int i = 0;i < map.length;i++){
-			for(int ind = 0;ind < map[i].length;ind++){
-				map[i][ind] = 'X';
-			}
+    //not finished 
+    public void interpret(String command){
+		String given = command;
+		switch(given){
+			case "w": map.interpret(command); player.xcor--; break;
+			case "a": map.interpret(command); player.ycor--; break;
+			case "s": map.interpret(command); player.xcor++; break;
+			case "d": map.interpret(command); player.ycor++; break;
+			default: System.out.println("404 command not found");
 		}
-		map[0][0] = 'P';
-		}**/
-    
-    /**public String displayMap(){
-		for(int row = 0;row < map.length;row++){
-			for(int col = 0;col < map[row].length;col++){
-				System.out.print(map[row][col]);
-			}
-			System.out.println();
-	}
-    }**/
+    }
+
+
+    //should print out all the nessecary information
+    public String toString(){
+	String printOut = map.toString();
+	printOut += "\n";
+	return printOut;
+    }
 }

@@ -2,7 +2,8 @@ public class Game{
     public static Map map;
     public static Enemy[] enemies;
     public static Character player;
-	//public static int floorMulitplier;
+    //public static int floorMulitplier;
+    private String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
 
     //default constructors
     public Game(){
@@ -19,11 +20,12 @@ public class Game{
     public void interpret(String command){
 		String given = command;
 		switch(given){
-			case "w": map.interpret(command); player.xcor--; break;
-			case "a": map.interpret(command); player.ycor--; break;
-			case "s": map.interpret(command); player.xcor++; break;
-			case "d": map.interpret(command); player.ycor++; break;
-			default: System.out.println("404 command not found");
+		case "w": map.interpret(command); player.xcor--; break;
+		case "a": map.interpret(command); player.ycor--; break;
+		case "s": map.interpret(command); player.xcor++; break;
+		case "d": map.interpret(command); player.ycor++; break;
+		case "help": System.out.println(help);
+		default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 		}
     }
 

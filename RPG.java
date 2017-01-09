@@ -3,9 +3,15 @@ import java.util.Scanner;
 public class RPG{
     //contains all the data
     private static Game game;
+    private static final String help = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\t java RPG.java [seed [characterType]] /nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack"; 
+    
 
     //interprets commands and passes it to game()
     public static void main(String[]args){
+	if(args.length = 0){
+	    System.out.println(help);
+	    System.exit(1);
+	}
 	game = new Game();
 	while(game.getAlive()){
 	    routine();

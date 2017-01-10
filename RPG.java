@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class RPG{
     //contains all the data
     private static Game game;
-    private static final String help = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG skip \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack"; 
+    private static final String help = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed [characterType]] (so far only help is in)\nUse \"random\" in place of seed for a random seed \nUse wasd to move and ijkl to attack \n\t(w/i - up; a/j - left; s/k - down; d/l - down)"; 
     
 
     //interprets commands and passes it to game()
@@ -12,21 +12,27 @@ public class RPG{
 	    System.out.println(help);
 	    System.exit(1);
 	}
+	
+	//initializes game
 	game = new Game();
+
+	//starts the loop of the game
 	while(game.getAlive()){
 	    routine();
 	}
     }
 
     //clears screen
-    private static void clearScreen(){
+    public static void clearScreen(){
 	System.out.println("\033[2J\033[;H");
     }
 
     //loop that continously runs
     private static void routine(){
-	//game's toString prints out map
+	//game's toString prints out map and all other necessary information
 	System.out.println(game);
+
+	
 	//checks for terminal input
 
 	//this part here will have to change
@@ -47,9 +53,7 @@ public class RPG{
 	
 	Scanner console = new Scanner(System.in);
 	String command = console.nextLine();
-	clearScreen();
 	//hands the command to game
-	game.map.getXY(game.player.xcor, game.player.ycor);
 	game.interpret(command);
     }
 }

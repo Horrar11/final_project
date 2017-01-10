@@ -1,11 +1,16 @@
+import java.util.Random;
 public class Map{
-	public char[][] grid;
-	private int playerX = 1;
-	private int playerY = 1;
-	private char saveChar = ' ';
-	
-	public Map(int row, int col){
+    public char[][] grid;
+    private int playerX;
+    private int playerY;
+    private char saveChar = ' ';//read the code if you dont understand
+	public int lengthX, lengthY;
+
+    //sets up the border of the map and randomly places the player
+    public Map(int row, int col){
 	grid = new char[row][col];
+	lengthX = row;
+	lengthY = col;
 	for(int i = 0;i < row;i++){
 	    for(int ind = 0;ind < col;ind++){
 		grid[i][ind] = ' ';
@@ -14,21 +19,32 @@ public class Map{
 		}
 	    }
 	}
+	Random rand = new Random();
+	playerX = rand.nextInt(row - 2) + 1;
+	playerY = rand.nextInt(col - 2) + 1; 
+	saveChar = grid[playerX][playerY];
 	setPlayerPos();
     }
+
+    //puts a 'P' on the map wherever the player is
     public void setPlayerPos(){grid[playerX][playerY] = 'P';}
 	
-	public void getXY(int x, int y){playerX = x; playerY = y;}
+	//puts a 'E' on the map wherever an enemy is
+    public void setEnemyPos(int x, int y){grid[x][y] = 'E';}
 	
+	//update the coordinates of the player to place on the map
+    public void getXY(int x, int y){playerX = x; playerY = y;}
+
+    //prints out the map
     public String toString(){
-		String toRet = "";
-		for(int row = 0;row < grid.length;row++){
-			for(int col = 0;col < grid[row].length;col++){
-			toRet += grid[row][col];
+	String toRet = "";
+	for(int row = 0;row < grid.length;row++){
+	    for(int col = 0;col < grid[row].length;col++){
+		toRet += grid[row][col];
 	    }
-		toRet += "\n";
-		}
-		return toRet;
+	    toRet += "\n";
+	}
+	return toRet;
     }
 	
 	public class InvalidAreaException extends Exception{
@@ -53,8 +69,9 @@ public class Map{
 		}
 	}
 	
-    public boolean interpret(String arg) throws ArrayIndexOutOfBoundsException, InvalidAreaException{
+    public boolean interpret(String arg) throws InvalidAreaException, ArrayIndexOutOfBoundsException{
 		String given = arg;
+		given = given.toLowerCase();
 		switch(given){
 		case "w":
 			try{
@@ -64,8 +81,7 @@ public class Map{
 					throw new InvalidAreaException();
 				}
 				setPlayerPos();
-			}
-			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerX ++;
 				mOOB();
 				setPlayerPos();
@@ -79,8 +95,7 @@ public class Map{
 					throw new InvalidAreaException();
 				}
 				setPlayerPos();
-			}
-			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerY ++;
 				mOOB();
 				setPlayerPos();
@@ -94,8 +109,7 @@ public class Map{
 					throw new InvalidAreaException();
 				}
 				setPlayerPos();
-			}
-			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerX --;
 				mOOB();
 				setPlayerPos();
@@ -109,8 +123,7 @@ public class Map{
 					throw new InvalidAreaException();
 				}
 				setPlayerPos();
-			}
-			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerY --;
 				mOOB();
 				setPlayerPos();

@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Game{
     public static Map map;
     public static Enemy[] enemies;
@@ -9,6 +10,7 @@ public class Game{
     public Game(){
 	map = new Map(20, 30);
 	player = new Character();
+	spawnEnemies();
     }
 
     //checks if the player is alive or not
@@ -16,7 +18,10 @@ public class Game{
 	return player.getAlive();
     }
 	
-    //not finished 
+    //sends command over to map to see if the map can place
+	//the player in the place he wants to go, if not then 
+	//nothing happens and the player recieves a "You can't go there!"
+	//message.
     public void interpret(String command){
 		String given = command;
 		switch(given){
@@ -29,7 +34,15 @@ public class Game{
 		}
     }
 
-
+	//populate the enemies array
+	public void spawnEnemies(){
+		Random amount = new Random();
+		enemies = new Enemy[amount.nextInt(10)+1];
+		for (int i = 0; i < enemies.length; i++){
+			enemies[i] = new Enemy(amount.nextInt((map.lengthX - 2) + 1),amount.nextInt((map.lengthY - 2) + 1));
+		}
+	}
+	
     //should print out all the nessecary information
     public String toString(){
 	String printOut = map.toString();

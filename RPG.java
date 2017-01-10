@@ -25,8 +25,11 @@ public class RPG{
 
     //loop that continously runs
     private static void routine(){
+		
 	//game's toString prints out map
 	System.out.println(game);
+	
+	
 	//checks for terminal input
 
 	//this part here will have to change
@@ -50,6 +53,9 @@ public class RPG{
 	clearScreen();
 	//hands the command to game
 	game.map.getXY(game.player.xcor, game.player.ycor);
+	for (int i = 0; i < game.enemies.length; i++){
+		game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
+	}
 	game.interpret(command);
     }
 }

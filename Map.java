@@ -40,24 +40,35 @@ public class Map{
 
     //for replacing the old p
     public void makeLand(int x, int y){grid[x][y] = saveChar;}
-    //for replacing the old p	
+    //No idea what anton wanted this to be
     public void restoreLand(int x, int y){saveChar = grid[x][y];}
 	
     public boolean interpret(String arg){
 	try{
 	switch(arg){
 	case "w":
-	    if(playerX -- <= 0){mOOB("invalid movement up");}
-	    
+	    if(playerX - 1 <= 0){mOOB("invalid movement up");}
+	    makeLand(playerX, playerY);
+	    playerX --;
+	    setPlayerPos();
 	    break;
 	case "a":
-	    if(playerY -- <= 0){mOOB("invalid movement left");}
+	    if(playerY - 1 <= 0){mOOB("invalid movement left");}
+	    makeLand(playerX, playerY);
+	    playerY --;
+	    setPlayerPos();
 	    break;
 	case "s":
-	    if(playerX ++ >= grid.length - 1){mOOB("invalid movement down");}
+	    if(playerX + 1 >= grid.length - 1){mOOB("invalid movement down");}
+	    makeLand(playerX, playerY);
+	    playerX ++;
+	    setPlayerPos();
 	    break;
         case "d":
-	    if(playerY ++ >= grid[0].length - 1){mOOB("invalid movement right");}
+	    if(playerY + 1 >= grid[0].length - 1){mOOB("invalid movement right");}
+	    makeLand(playerX, playerY);
+	    playerY ++;
+	    setPlayerPos();
 	    break;
 	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 	    

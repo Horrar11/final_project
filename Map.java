@@ -31,25 +31,41 @@ public class Map{
 		return toRet;
     }
 	
+	public class InvalidAreaException extends Exception{
+		public InvalidAreaException(){}
+		public InvalidAreaException(String message){
+			super(message);
+		}
+	}
+	
 	public void mOOB(){
-	System.out.println("\t\t\tMovement was out of bounds!");
+	System.out.println("\t\t\tYou cannot go there!");
     }
 	
 	public void makeLand(){grid[playerX][playerY] = saveChar;}
 	
-	public void restoreLand(){saveChar = grid[playerX][playerY];}
+	public boolean restoreLand(){
+		if(grid[playerX][playerY] == '#')
+			{return true;}
+		else{
+			saveChar = grid[playerX][playerY];
+			return false;
+		}
+	}
 	
-    public boolean interpret(String arg) throws ArrayIndexOutOfBoundsException{
+    public boolean interpret(String arg) throws ArrayIndexOutOfBoundsException, InvalidAreaException{
 		String given = arg;
 		switch(given){
 		case "w":
 			try{
 				makeLand();
 				playerX --;
-				restoreLand();
+				if(restoreLand()){
+					throw new InvalidAreaException();
+				}
 				setPlayerPos();
 			}
-			catch (ArrayIndexOutOfBoundsException e){
+			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerX ++;
 				mOOB();
 				setPlayerPos();
@@ -59,10 +75,12 @@ public class Map{
 			try{
 				makeLand();
 				playerY --;
-				restoreLand();
+				if(restoreLand()){
+					throw new InvalidAreaException();
+				}
 				setPlayerPos();
 			}
-			catch (ArrayIndexOutOfBoundsException e){
+			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerY ++;
 				mOOB();
 				setPlayerPos();
@@ -72,10 +90,12 @@ public class Map{
 			try{
 				makeLand();
 				playerX ++;
-				restoreLand();
+				if(restoreLand()){
+					throw new InvalidAreaException();
+				}
 				setPlayerPos();
 			}
-			catch (ArrayIndexOutOfBoundsException e){
+			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerX --;
 				mOOB();
 				setPlayerPos();
@@ -85,10 +105,12 @@ public class Map{
 			try{
 				makeLand();
 				playerY ++;
-				restoreLand();
+				if(restoreLand()){
+					throw new InvalidAreaException();
+				}
 				setPlayerPos();
 			}
-			catch (ArrayIndexOutOfBoundsException e){
+			catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
 				playerY --;
 				mOOB();
 				setPlayerPos();
@@ -97,4 +119,5 @@ public class Map{
 	default: System.out.println("\tMap \n");
 	}
     return true;}
+	
 }

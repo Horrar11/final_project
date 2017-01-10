@@ -19,21 +19,12 @@ public class Game{
     //not finished 
     public void interpret(String command){
 	RPG.clearScreen();
-	String given = command;
-	//how to distinguish the inputs
-	/**switch(given){
-	case "w": if (map.interpret(command)){player.xcor--;} break;
-	case "a": if (map.interpret(command)){player.ycor--;} break;
-	case "s": if (map.interpret(command)){player.xcor++;} break;
-	case "d": if (map.interpret(command)){player.ycor++;} break;
-	case "help": System.out.println(help); break;
-	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
-	}*/
+	//push the handling to map
 	map.interpret(command);
     }
 
 
-    //should print out all the nessecary information
+    //should print out all the nessecary information in the game
     public String toString(){
 	String printOut = map.toString();
 	printOut += "\n";

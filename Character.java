@@ -4,7 +4,7 @@ public class Character extends Unit{
     public String weapon;
     //public Inventory inv;
 
-    public Character{
+    public Character(){
 	hp = 100.00;
 	mp = 100.00;
 	atk = 10;

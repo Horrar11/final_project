@@ -20,10 +20,10 @@ public class Game{
     public void interpret(String command){
 		String given = command;
 		switch(given){
-		case "w": map.interpret(command); player.xcor--; break;
-		case "a": map.interpret(command); player.ycor--; break;
-		case "s": map.interpret(command); player.xcor++; break;
-		case "d": map.interpret(command); player.ycor++; break;
+		case "w": if (map.interpret(command)){player.xcor--;} break;
+		case "a": if (map.interpret(command)){player.ycor--;} break;
+		case "s": if (map.interpret(command)){player.xcor++;} break;
+		case "d": if (map.interpret(command)){player.ycor++;} break;
 		case "help": System.out.println(help);
 		default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 		}

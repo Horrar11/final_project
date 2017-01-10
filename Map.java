@@ -22,7 +22,7 @@ public class Map{
 	
     public void setPXY(int x, int y){playerX = x; playerY = y;}
 
-
+    //prints out the map
     public String toString(){
 	String toRet = "";
 	for(int row = 0;row < grid.length;row++){
@@ -34,75 +34,37 @@ public class Map{
 	return toRet;
     }
 	
-    public void mOOB(){
-	System.out.println("\t\t\tMovement was out of bounds!");
+    public void mOOB(String input) throws ArrayIndexOutOfBoundsException{
+	throw new ArrayIndexOutOfBoundsException(input);
     }
+
+    //for replacing the old p
+    public void makeLand(int x, int y){grid[x][y] = saveChar;}
+    //for replacing the old p	
+    public void restoreLand(int x, int y){saveChar = grid[x][y];}
 	
-    public void makeLand(){grid[playerX][playerY] = saveChar;}
-	
-    public void restoreLand(){saveChar = grid[playerX][playerY];}
-	
-    public boolean interpret(String arg) throws ArrayIndexOutOfBoundsException{
-	String given = arg;
-	    
-	switch(given){
+    public boolean interpret(String arg){
+	try{
+	switch(arg){
 	case "w":
-	    if(playerX - 1 <= 0){mOOB(); return false;}
-	    try{
-		makeLand();
-		playerX --;
-		restoreLand();
-		setPlayerPos();
-	    }
-	    catch (ArrayIndexOutOfBoundsException e){
-		mOOB();
-		playerX++;
-		setPlayerPos();
-		return false;
-	    } break;
+	    if(playerX -- <= 0){mOOB("invalid movement up");}
+	    
+	    break;
 	case "a":
-	    if(playerY - 1 <= 0){mOOB(); return false;}
-	    try{
-		makeLand();
-		playerY--;
-		restoreLand();
-		setPlayerPos();
-	    }
-	    catch (ArrayIndexOutOfBoundsException e){
-		mOOB();
-		playerY++;
-		setPlayerPos();
-		return false;
-	    } break;
+	    if(playerY -- <= 0){mOOB("invalid movement left");}
+	    break;
 	case "s":
-	    if(playerX ++ >= grid[0].length - 1){mOOB(); return false;}
-	    try{
-		makeLand();
-		playerX ++;
-		restoreLand();
-		setPlayerPos();
-	    }
-	    catch (ArrayIndexOutOfBoundsException e){
-		mOOB();
-		playerX --;
-		setPlayerPos();
-		return false;
-	    } break;
-	case "d":
-	    if(playerY ++ >= grid.length - 1){mOOB(); return false;}
-	    try{
-		makeLand();
-		playerY++;
-		restoreLand();
-		setPlayerPos();
-	    }
-	    catch (ArrayIndexOutOfBoundsException e){
-		mOOB();
-		playerY--;
-		setPlayerPos();
-		return false;
-	    } break;
-	default: System.out.println("\tMap \n");
+	    if(playerX ++ >= grid.length - 1){mOOB("invalid movement down");}
+	    break;
+        case "d":
+	    if(playerY ++ >= grid[0].length - 1){mOOB("invalid movement right");}
+	    break;
+	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
+	    
+	}}catch(ArrayIndexOutOfBoundsException e){
+	    System.out.println(e.getMessage());
+	    return false;
 	}
-	return true;}
+	return true;
+    }
 }

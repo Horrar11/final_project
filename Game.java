@@ -21,15 +21,15 @@ public class Game{
 	RPG.clearScreen();
 	String given = command;
 	//how to distinguish the inputs
-	switch(given){
+	/**switch(given){
 	case "w": if (map.interpret(command)){player.xcor--;} break;
 	case "a": if (map.interpret(command)){player.ycor--;} break;
 	case "s": if (map.interpret(command)){player.xcor++;} break;
 	case "d": if (map.interpret(command)){player.ycor++;} break;
 	case "help": System.out.println(help); break;
 	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
-	}
-	map.setPXY(this.player.xcor, this.player.ycor);
+	}*/
+	map.interpret(command);
     }
 
 

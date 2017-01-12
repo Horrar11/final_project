@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Character extends Unit{
     public double hp,mp;
     public int atk, def, dex, vit, wis, xcor, ycor;
@@ -13,13 +14,14 @@ public class Character extends Unit{
 	vit = 10;
 	wis = 10;
 	//weapon = inv.getWeapon();
-	xcor = 1;
-	ycor = 1;
 	//inv = new Inventory();
     }
-    
+    public void setSpawn(int row, int col){
+		Random rand = new Random();
+		xcor = rand.nextInt(Math.abs(row - 2) + 1);
+		ycor = rand.nextInt(Math.abs(col - 2) + 1);
+	}
     public void attack(){}
-
-    public void move(){
-    }
+	public boolean inRangeEnemy(){return false;}
+	public boolean inRangeShop(){return false;}
 }

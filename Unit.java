@@ -7,8 +7,6 @@ public abstract class Unit{
 
     abstract void attack();
 
-    abstract void move();
-
     public boolean getAlive(){
 	return hp >= 0;
     }

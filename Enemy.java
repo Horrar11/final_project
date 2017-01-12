@@ -13,7 +13,15 @@ public class Enemy extends Unit{
 	}
     public void attack(){}
 	
-    public void move(){}
+    public void move(int dir){
+		switch(dir){
+			case 0: xcor --; break;
+			case 1: xcor ++; break;
+			case 2: ycor --; break;
+			case 3: ycor ++; break;
+			default: break;
+		}
+	}
 
     public void auto(){}
 }

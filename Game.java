@@ -10,7 +10,10 @@ public class Game{
     public Game(){
 	map = new Map(20, 30);
 	player = new Character();
+	player.setSpawn(20, 30);
+	map.setXY(player.xcor, player.ycor);
 	spawnEnemies();
+	map.setPlayerPos();
     }
 
     //checks if the player is alive or not
@@ -39,7 +42,7 @@ public class Game{
 		Random amount = new Random();
 		enemies = new Enemy[amount.nextInt(10)+1];
 		for (int i = 0; i < enemies.length; i++){
-			enemies[i] = new Enemy(amount.nextInt((map.lengthX - 2) + 1),amount.nextInt((map.lengthY - 2) + 1));
+			enemies[i] = new Enemy(amount.nextInt(Math.abs(map.lengthX - 2) + 1),amount.nextInt(Math.abs(map.lengthY - 2) + 1));
 		}
 	}
 	

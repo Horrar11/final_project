@@ -65,93 +65,93 @@ public class Map{
 	public void mOOB(){
 	System.out.println("\t\t\tYou cannot go there!");
     }
+    
+    public void makeLand(){grid[playerX][playerY] = saveChar;}
 	
-	public void makeLand(){grid[playerX][playerY] = saveChar;}
-	
-	public boolean restoreLand(){
-		if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X'))
-			{return true;}
+    public boolean restoreLand(){
+	if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X'))
+	    {return true;}
 		else{
-			saveChar = grid[playerX][playerY];
-			return false;
+		    saveChar = grid[playerX][playerY];
+		    return false;
 		}
-	}
-	
+    }
+    
     public boolean interpret(String arg){
-		String given = arg;
-		given = given.toLowerCase();
-		switch(given){
-		case "w":
-			try{
-				makeLand();
-				playerX --;
-				if(restoreLand()){
-					throw new InvalidAreaException();
-				}
-				setPlayerPos();
-			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-				playerX ++;
-				mOOB();
-				setPlayerPos();
-				return false;
-			} break;
-		case "a":
-			try{
-				makeLand();
-				playerY --;
-				if(restoreLand()){
-					throw new InvalidAreaException();
-				}
-				setPlayerPos();
-			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-				playerY ++;
-				mOOB();
-				setPlayerPos();
-				return false;
-			} break;
+	String given = arg;
+	given = given.toLowerCase();
+	switch(given){
+	case "w":
+	    try{
+		makeLand();
+		playerX --;
+		if(restoreLand()){
+		    throw new InvalidAreaException();
+		}
+		setPlayerPos();
+	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+		playerX ++;
+		mOOB();
+		setPlayerPos();
+		return false;
+	    } break;
+	case "a":
+	    try{
+		makeLand();
+		playerY --;
+		if(restoreLand()){
+		    throw new InvalidAreaException();
+		}
+		setPlayerPos();
+	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+		playerY ++;
+		mOOB();
+		setPlayerPos();
+		return false;
+	    } break;
 	case "s":
-			try{
-				makeLand();
-				playerX ++;
-				if(restoreLand()){
-					throw new InvalidAreaException();
-				}
-				setPlayerPos();
-			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-				playerX --;
-				mOOB();
-				setPlayerPos();
-				return false;
-			} break;
+	    try{
+		makeLand();
+		playerX ++;
+		if(restoreLand()){
+		    throw new InvalidAreaException();
+		}
+		setPlayerPos();
+	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+		playerX --;
+		mOOB();
+		setPlayerPos();
+		return false;
+	    } break;
 	case "d":
-			try{
-				makeLand();
-				playerY ++;
-				if(restoreLand()){
-					throw new InvalidAreaException();
-				}
-				setPlayerPos();
-			} catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-				playerY --;
-				mOOB();
-				setPlayerPos();
-				return false;
-			} break;
+	    try{
+		makeLand();
+		playerY ++;
+		if(restoreLand()){
+		    throw new InvalidAreaException();
+		}
+		setPlayerPos();
+	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
+		playerY --;
+		mOOB();
+		setPlayerPos();
+		return false;
+	    } break;
 	default: System.out.println("\tMap \n");
 	}
-    return true;}
-	
-	
-	
-	public boolean notOccupied(int dir, int x, int y){
-		switch(dir){
-			case 0: if(grid[x-1][y] == ' ' || grid[x-1][y] == 'X'){return true;} break;
-			case 1: if(grid[x+1][y] == ' ' || grid[x+1][y] == 'X'){return true;} break;
-			case 2: if(grid[x][y-1] == ' ' || grid[x][y-1] == 'X'){return true;} break;
-			case 3: if(grid[x][y+1] == ' ' || grid[x][y+1] == 'X'){return true;} break;
-			default: return false;
-		}
-		
-		return false;
+	return true;}
+    
+    
+    
+    public boolean notOccupied(int dir, int x, int y){
+	switch(dir){
+	case 0: grid[x-1][y] == ' ' || grid[x-1][y] == 'X'; break;
+	case 1: grid[x+1][y] == ' ' || grid[x+1][y] == 'X'; break;
+	case 2: grid[x][y-1] == ' ' || grid[x][y-1] == 'X'; break;
+	case 3: grid[x][y+1] == ' ' || grid[x][y+1] == 'X'; break;
+	default: return false;
 	}
+	
+	return false;
+    }
 }

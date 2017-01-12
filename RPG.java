@@ -36,8 +36,8 @@ public class RPG{
 		
 	//game's toString prints out map
 	System.out.print(game);
-	
-	if(game.player.inRangeEnemy()){
+	if(){}
+	else if(game.player.inRangeEnemy()){
 		System.out.print(fightUI);
 	}
 	else if(game.player.inRangeShop()){

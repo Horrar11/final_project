@@ -5,8 +5,9 @@ public class Map{
 	//to get input from the game to properly
 	//render enemies and the player
 	private int playerX, playerY;
-    private char saveChar = ' ';//read the code if you dont understand
+    public char saveChar = ' ';//read the code if you dont understand
 	public int lengthX, lengthY;
+	public int stairX, stairY;
 
     //sets up the border of the map and randomly places the player
     public Map(int row, int col){
@@ -21,6 +22,10 @@ public class Map{
 				}
 			}
 		}
+		Random rand = new Random();
+		stairX = Math.abs(rand.nextInt(row - 2)) + 1;
+		stairY = Math.abs(rand.nextInt(col - 2)) + 1;
+		grid[stairX][stairY] = 'S';
     }
 
 	public void clear(){
@@ -32,6 +37,7 @@ public class Map{
 				}
 			}
 		}
+		grid[stairX][stairY] = 'S';
 	}
 	
     //puts a 'P' on the map wherever the player is
@@ -69,7 +75,7 @@ public class Map{
     public void makeLand(){grid[playerX][playerY] = saveChar;}
 	
     public boolean restoreLand(){
-	if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X'))
+	if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X' || grid[playerX][playerY] == 'S'))
 	    {return true;}
 		else{
 		    saveChar = grid[playerX][playerY];
@@ -145,10 +151,10 @@ public class Map{
     
     public boolean notOccupied(int dir, int x, int y){
 	switch(dir){
-	case 0: grid[x-1][y] == ' ' || grid[x-1][y] == 'X'; break;
-	case 1: grid[x+1][y] == ' ' || grid[x+1][y] == 'X'; break;
-	case 2: grid[x][y-1] == ' ' || grid[x][y-1] == 'X'; break;
-	case 3: grid[x][y+1] == ' ' || grid[x][y+1] == 'X'; break;
+	case 0: if(grid[x-1][y] == ' ' || grid[x-1][y] == 'X'){return true;}; break;
+	case 1: if(grid[x+1][y] == ' ' || grid[x+1][y] == 'X'){return true;}; break;
+	case 2: if(grid[x][y-1] == ' ' || grid[x][y-1] == 'X'){return true;}; break;
+	case 3: if(grid[x][y+1] == ' ' || grid[x][y+1] == 'X'){return true;}; break;
 	default: return false;
 	}
 	

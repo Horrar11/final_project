@@ -8,7 +8,8 @@ public class RPG{
 	private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
 	private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
     private static final String help = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG skip \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack"; 
-
+	private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
+	
     //interprets commands and passes it to game()
     public static void main(String[]args){
 	if(args.length == 0){
@@ -36,7 +37,9 @@ public class RPG{
 		
 	//game's toString prints out map
 	System.out.print(game);
-	if(){}
+	if(game.map.saveChar == 'S'){
+		System.out.print(stairs);
+	}
 	else if(game.player.inRangeEnemy()){
 		System.out.print(fightUI);
 	}

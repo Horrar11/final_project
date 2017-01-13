@@ -1,12 +1,14 @@
 import java.util.Random;
 public class Map{
     public char[][] grid;
-    //these here declared stuff is for the map
-    //to get input from the game to properly
-    //render enemies and the player
-    private int playerX, playerY;
-    private char saveChar = ' ';//read the code if you dont understand
-    public int lengthX, lengthY;
+
+	//these here declared stuff is for the map
+	//to get input from the game to properly
+	//render enemies and the player
+	private int playerX, playerY;
+    public char saveChar = ' ';//read the code if you dont understand
+	public int lengthX, lengthY;
+	public int stairX, stairY;
 
     //sets up the border of the map and randomly places the player
     public Map(int row, int col){
@@ -19,8 +21,10 @@ public class Map{
 		if(i == 0 || ind == 0 || i == row -1 || ind == col -1){
 		    grid[i][ind] = '#';
 		}
-	    }
-	}
+		Random rand = new Random();
+		stairX = Math.abs(rand.nextInt(row - 2)) + 1;
+		stairY = Math.abs(rand.nextInt(col - 2)) + 1;
+		grid[stairX][stairY] = 'S';
     }
 
     public void clear(){
@@ -30,7 +34,7 @@ public class Map{
 		if(i == 0 || ind == 0 || i == lengthX - 1 || ind == lengthY - 1){
 		    grid[i][ind] = '#';
 		}
-	    }
+		grid[stairX][stairY] = 'S';
 	}
     }
 	
@@ -65,18 +69,19 @@ public class Map{
     public void mOOB(){
 	System.out.println("\t\t\tYou cannot go there!");
     }
-	
+    
     public void makeLand(){grid[playerX][playerY] = saveChar;}
 	
+
     public boolean restoreLand(){
-	if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X'))
+	if(!(grid[playerX][playerY] == ' ' || grid[playerX][playerY] == 'X' || grid[playerX][playerY] == 'S'))
 	    {return true;}
-	else{
-	    saveChar = grid[playerX][playerY];
-	    return false;
-	}
+		else{
+		    saveChar = grid[playerX][playerY];
+		    return false;
+		}
     }
-	
+    
     public boolean interpret(String arg){
 	String given = arg;
 	given = given.toLowerCase();
@@ -140,18 +145,17 @@ public class Map{
 	default: System.out.println("\tMap \n");
 	}
 	return true;}
-	
-	
-	
+    
+    
+    
     public boolean notOccupied(int dir, int x, int y){
 	switch(dir){
-	case 0: if(grid[x-1][y] == ' ' || grid[x-1][y] == 'X'){return true;} break;
-	case 1: if(grid[x+1][y] == ' ' || grid[x+1][y] == 'X'){return true;} break;
-	case 2: if(grid[x][y-1] == ' ' || grid[x][y-1] == 'X'){return true;} break;
-	case 3: if(grid[x][y+1] == ' ' || grid[x][y+1] == 'X'){return true;} break;
+	case 0: if(grid[x-1][y] == ' ' || grid[x-1][y] == 'X'){return true;}; break;
+	case 1: if(grid[x+1][y] == ' ' || grid[x+1][y] == 'X'){return true;}; break;
+	case 2: if(grid[x][y-1] == ' ' || grid[x][y-1] == 'X'){return true;}; break;
+	case 3: if(grid[x][y+1] == ' ' || grid[x][y+1] == 'X'){return true;}; break;
 	default: return false;
 	}
-		
 	return false;
     }
 }

@@ -17,11 +17,11 @@ public class Character extends Unit{
 	//inv = new Inventory();
     }
     public void setSpawn(int row, int col){
-		Random rand = new Random();
+	Random rand = new Random();
 		xcor = rand.nextInt(Math.abs(row - 2) + 1);
 		ycor = rand.nextInt(Math.abs(col - 2) + 1);
 	}
     public void attack(){}
-	public boolean inRangeEnemy(){return false;}
-	public boolean inRangeShop(){return false;}
+    public boolean inRangeEnemy(){return false;}
+    public boolean inRangeShop(){return false;}
 }

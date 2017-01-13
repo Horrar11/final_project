@@ -4,11 +4,11 @@ public class RPG{
     //contains all the data
     private static Game game;
     private static String prompt;
-	private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
-	private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
-	private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
+    private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
+    private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
+    private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
     private static final String help = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG skip \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack"; 
-	private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
+    private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
 	
     //interprets commands and passes it to game()
     public static void main(String[]args){
@@ -38,13 +38,13 @@ public class RPG{
 	//game's toString prints out map
 	System.out.print(game);
 	if(game.map.saveChar == 'S'){
-		System.out.print(stairs);
+	    System.out.print(stairs);
 	}
 	else if(game.player.inRangeEnemy()){
-		System.out.print(fightUI);
+	    System.out.print(fightUI);
 	}
 	else if(game.player.inRangeShop()){
-		System.out.print(shopUI);
+	    System.out.print(shopUI);
 	}
 	else {System.out.print(standardUI);}
 	System.out.print("\t" + prompt);	
@@ -52,17 +52,17 @@ public class RPG{
 	String command = console.nextLine();
 	clearScreen();
 	for (int i = 0; i < game.enemies.length; i++){
-		Random teller = new Random();
-		int direction = teller.nextInt(4);
-		if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
-			game.enemies[i].move(direction);
-		}
+	    Random teller = new Random();
+	    int direction = teller.nextInt(4);
+	    if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
+		game.enemies[i].move(direction);
+	    }
 	}
 	game.map.clear();
 	game.map.setXY(game.player.xcor,game.player.ycor);
 	game.map.setPlayerPos();
 	for (int i = 0; i < game.enemies.length; i++){
-		game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
+	    game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
 	}
 	game.interpret(command);
     }

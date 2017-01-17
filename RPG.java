@@ -7,7 +7,7 @@ public class RPG{
     private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
     private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
     private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
-    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG skip \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack";
+    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack";
     private static final String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
     private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
 

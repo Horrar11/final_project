@@ -35,14 +35,9 @@ public class Game{
     //nothing happens and the player recieves a
     //"You can't go there!" message.
     public void interpret(String command){
-	String given = command;
-	switch(given){
-	case "w": if (map.interpret(command)){player.xcor--;} break;
-	case "a": if (map.interpret(command)){player.ycor--;} break;
-	case "s": if (map.interpret(command)){player.xcor++;} break;
-	case "d": if (map.interpret(command)){player.ycor++;} break;
+	switch(command){
 	case "yes": if(map.saveChar == 'S'){map = new Map(20,30,player,randGen); spawnEnemies();} break;
-	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
+	default: map.interpret(command);
 	}
     }
     

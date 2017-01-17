@@ -31,7 +31,7 @@ public class Character extends Unit{
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
 
-    public String toString(){
-	return "testing";
+    public char toString(){
+	return 'P';
     }
 }

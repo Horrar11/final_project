@@ -51,7 +51,6 @@ public class Map{
 	
     //this method is a helper method for makeLand() and restoreLand()
     public void setXY(int x, int y){
-	System.out.println(player);
 	player.setXY(x,y);
     }
 
@@ -148,7 +147,8 @@ public class Map{
 		setPlayerPos();
 		return false;
 	    } break;
-	default: System.out.println("\tMap \n");
+	case "":break;
+	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 	}
 	return true;}
 	

@@ -12,7 +12,7 @@ public class Map{
 
     //sets up the border of the map and randomly places the player
     public Map(int row, int col, Character player){
-	
+	this.player = player;
 	grid = new char[row][col];
 	lengthX = row;
 	lengthY = col;
@@ -49,7 +49,10 @@ public class Map{
     public void setEnemyPos(int x, int y){grid[x][y] = 'E';}
 	
     //this method is a helper method for makeLand() and restoreLand()
-    public void setXY(int x, int y){player.xcor = x; player.ycor = y;}
+    public void setXY(int x, int y){
+	System.out.println(player);
+	player.setXY(x,y);
+    }
 
     //prints out the map
     public String toString(){

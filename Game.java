@@ -11,13 +11,14 @@ public class Game{
 
     //default constructors
     public Game(){
-	map = new Map(20, 30, player);
+	randGen = new Random();
 	player = new Character();
+	System.out.println(player);
+	map = new Map(20, 30, player);
 	player.setSpawn(20, 30);
-	map.setXY(player.xcor, player.ycor);
+	map.setXY( map.lengthX / 2, map.lengthX / 2);
 	spawnEnemies();
 	map.setPlayerPos();
-	randGen = new Random();
     }
 
       public Game(int number){

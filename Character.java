@@ -16,12 +16,22 @@ public class Character extends Unit{
 	//weapon = inv.getWeapon();
 	//inv = new Inventory();
     }
+    
     public void setSpawn(int row, int col){
 	Random rand = new Random();
 		xcor = rand.nextInt(Math.abs(row - 2) + 1);
 		ycor = rand.nextInt(Math.abs(col - 2) + 1);
 	}
     public void attack(){}
+
+    public void setXY(int x, int y){
+	xcor = x;
+	ycor = y;
+    }
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
+
+    public String toString(){
+	return "testing";
+    }
 }

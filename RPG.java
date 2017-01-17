@@ -10,6 +10,8 @@ public class RPG{
     private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack";
     private static final String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
     private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
+    public static Random randGen;
+    
 
     //interprets commands and passes it to game()
     public static void main(String[]args){
@@ -19,7 +21,8 @@ public class RPG{
 	    System.exit(1);
 	}
 	if(args.length > 0){
-	    game = new Game(Integer.parseInt(args[0]));
+	    randGen = new Random(Integer.parseInt(args[0]));
+	    game = new Game(randGen);
 	}else{
 	    game = new Game();
 	}
@@ -43,11 +46,11 @@ public class RPG{
     private static void routine(){	
 	//game's toString prints out map
 	System.out.print(game);
+	//gives the proper display of commands based on position
 	if(game.map.saveChar == 'S'){
 	    System.out.print(stairs);
 	}
 	else if(game.player.inRangeEnemy()){
-	    //gives the proper display of commands based on position
 	    System.out.print(fightUI);
 	}
 	else if(game.player.inRangeShop()){
@@ -61,8 +64,7 @@ public class RPG{
 	command = command.toLowerCase();
 	clearScreen();
 	for (int i = 0; i < game.enemies.length; i++){
-	    Random teller = new Random();
-	    int direction = teller.nextInt(4);
+	    int direction = randGen.nextInt(4);
 	    if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
 		game.enemies[i].move(direction);
 	    }

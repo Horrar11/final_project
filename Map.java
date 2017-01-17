@@ -8,10 +8,12 @@ public class Map{
     public int lengthX, lengthY;
     public int stairX, stairY;
     public Character player;
+    public Random randGen;
 
 
     //sets up the border of the map and randomly places the player
-    public Map(int row, int col, Character player){
+    public Map(int row, int col, Character player,Random randGen){
+	this.randGen = randGen;
 	this.player = player;
 	grid = new char[row][col];
 	lengthX = row;
@@ -22,9 +24,8 @@ public class Map{
 		if(i == 0 || ind == 0 || i == row -1 || ind == col -1){
 		    grid[i][ind] = '#';
 		}
-		Random rand = new Random();
-		stairX = Math.abs(rand.nextInt(row - 2)) + 1;
-		stairY = Math.abs(rand.nextInt(col - 2)) + 1;
+		stairX = Math.abs(randGen.nextInt(row - 2)) + 1;
+		stairY = Math.abs(randGen.nextInt(col - 2)) + 1;
 		grid[stairX][stairY] = 'S';
 	    }
 	}

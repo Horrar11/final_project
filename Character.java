@@ -1,17 +1,37 @@
+import java.util.Random;
 public class Character extends Unit{
-	//public Inventory inv = new Inventory();
-	public double hp = 100.00;
-	public double mp = 100.00;
-    public int atk = 10;
-	public int def = 0;
-	public int dex = 10;
-	public int vit = 10;
-	public int wis = 10;
-	//weapon = inv.getWeapon();
-	public int xcor = 1;
-	public int ycor = 1;
+    public double hp,mp;
+    public int atk, def, dex, vit, wis, xcor, ycor;
+    public String weapon;
+    //public Inventory inv;
 
+    public Character(){
+	hp = 100.00;
+	mp = 100.00;
+	atk = 10;
+	def = 0;
+	dex = 10;
+	vit = 10;
+	wis = 10;
+	//weapon = inv.getWeapon();
+	//inv = new Inventory();
+    }
+    
+    public void setSpawn(int row, int col){
+	Random rand = new Random();
+		xcor = rand.nextInt(Math.abs(row - 2) + 1);
+		ycor = rand.nextInt(Math.abs(col - 2) + 1);
+	}
     public void attack(){}
 
-    public void move(){}
-}
+    public void setXY(int x, int y){
+	xcor = x;
+	ycor = y;
+    }
+    public boolean inRangeEnemy(){return false;}
+    public boolean inRangeShop(){return false;}
+
+    public char toString(){
+	return 'P';
+    }
+} 

@@ -42,10 +42,8 @@ public class RPG{
 	System.out.println("\033[2J\033[;H");
     }
 
-    //loop that continously runs
-    private static void routine(){	
-	//game's toString prints out map
-	System.out.print(game);
+    //chooses the proper UI 
+    private static void displayUI(){
 	//gives the proper display of commands based on position
 	if(game.map.saveChar == 'S'){
 	    System.out.print(stairs);
@@ -57,20 +55,29 @@ public class RPG{
 	    System.out.print(shopUI);
 	}
 	else {System.out.print(standardUI);}
+    }
+
+    
+    //loop that continously runs
+    private static void routine(){	
+	//game's toString prints out map
+	System.out.print(game);
+	displayUI();
 	//gets the command that the player types in
 	System.out.print("\t" + prompt);	
 	Scanner console = new Scanner(System.in);
 	String command = console.nextLine();
 	command = command.toLowerCase();
 	clearScreen();
+	//moves all the enemies
 	for (int i = 0; i < game.enemies.length; i++){
 	    int direction = randGen.nextInt(4);
 	    if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
 		game.enemies[i].move(direction);
 	    }
 	}
+	//refreshes the map
 	game.map.clear();
-	game.map.setXY(game.player.xcor,game.player.ycor);
 	game.map.setPlayerPos();
 	for (int i = 0; i < game.enemies.length; i++){
 	    game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
@@ -80,4 +87,6 @@ public class RPG{
 	default: game.interpret(command);
 	}
     }
+
+    
 }

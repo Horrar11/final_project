@@ -1,37 +1,30 @@
 import java.util.Random;
 public class Character extends Unit{
-    public double hp,mp;
-    public int atk, def, dex, vit, wis, xcor, ycor;
+    //weapon decides how the player attacks(ranged vs melee)
     public String weapon;
     //public Inventory inv;
 
+    
+    //basic character trope
     public Character(){
 	hp = 100.00;
-	mp = 100.00;
 	atk = 10;
-	def = 0;
-	dex = 10;
-	vit = 10;
-	wis = 10;
+	weapon = "sword";
 	//weapon = inv.getWeapon();
 	//inv = new Inventory();
     }
-    
-    public void setSpawn(int row, int col){
-	Random rand = new Random();
-		xcor = rand.nextInt(Math.abs(row - 2) + 1);
-		ycor = rand.nextInt(Math.abs(col - 2) + 1);
-	}
+
+    //implemented later
     public void attack(){}
 
+
+    /*
+     *don't think this is necessary, but I'm just commenting in case I do need it later
     public void setXY(int x, int y){
 	xcor = x;
 	ycor = y;
     }
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
-
-    public char toString(){
-	return 'P';
-    }
+    */
 }

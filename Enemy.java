@@ -1,27 +1,17 @@
 import java.util.Random;
+//should be abstract
 public class Enemy extends Unit{
-    public double hp;
-    public int atk, def, xcor, ycor;
-	
-	public Enemy(int x, int y){
+
+    //basic 
+    public Enemy(int x, int y){
 	Random rand = new Random();
-	xcor = x;
-	ycor = y;
-	hp = 100.00;
+	cords[0] = x;
+	cords[1] = y;
+	hp = 100
 	atk = 25;
-	def = rand.nextInt(11);
-	}
+    }
+    
     public void attack(){}
-	
-    public void move(int dir){
-		switch(dir){
-			case 0: xcor --; break;
-			case 1: xcor ++; break;
-			case 2: ycor --; break;
-			case 3: ycor ++; break;
-			default: break;
-		}
-	}
 
     public void auto(){}
 }

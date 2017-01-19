@@ -1,15 +1,13 @@
 import java.util.Random;
 public class Enemy extends Unit{
-    public double hp;
-    public int atk, def, xcor, ycor;
-	
-	public Enemy(int x, int y){
+    public Enemy(int x, int y, int seed){
 	Random rand = new Random();
 	xcor = x;
 	ycor = y;
 	hp = 100.00;
 	atk = 25;
 	def = rand.nextInt(11);
+	displayChar = 'E';
 	}
     public void attack(){}
 	

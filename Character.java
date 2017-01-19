@@ -3,9 +3,10 @@ public class Character extends Unit{
     public double hp,mp;
     public int atk, def, dex, vit, wis, xcor, ycor;
     public String weapon;
+    public int seed;
     //public Inventory inv;
 
-    public Character(){
+    public Character(int seed){
 	hp = 100.00;
 	mp = 100.00;
 	atk = 10;
@@ -13,12 +14,14 @@ public class Character extends Unit{
 	dex = 10;
 	vit = 10;
 	wis = 10;
+	displayChar = 'P';
+	this.seed = seed;
 	//weapon = inv.getWeapon();
 	//inv = new Inventory();
     }
     
     public void setSpawn(int row, int col){
-	Random rand = new Random();
+	Random rand = new Random(seed);
 		xcor = rand.nextInt(Math.abs(row - 2) + 1);
 		ycor = rand.nextInt(Math.abs(col - 2) + 1);
 	}
@@ -30,8 +33,5 @@ public class Character extends Unit{
     }
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
-
-    public char toString(){
-	return 'P';
     }
 } 

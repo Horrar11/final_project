@@ -36,19 +36,9 @@ public class Map{
 	    grid[stairX][stairY] = 'S';
 	}
     }
-
+    
+    public void setPos(int x, int y, char symbol){grid[x][y] = symbol;}
 	
-    //puts a 'P' on the map wherever the player is
-    public void setPlayerPos(){grid[player.xcor][player.ycor] = 'P';}
-	
-    //puts a 'E' on the map wherever an enemy is
-    public void setEnemyPos(int x, int y){grid[x][y] = 'E';}
-	
-    //this method is a helper method for makeLand() and restoreLand()
-    public void setXY(int x, int y){
-	player.setXY(x,y);
-    }
-
     //prints out the map
     public String toString(){
 	String toRet = "";

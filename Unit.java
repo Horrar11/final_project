@@ -1,9 +1,7 @@
 public abstract class Unit{
     public double hp;
-    public int atk;
-    public int def;
-    public int xcor;
-    public int ycor;
+    public int atk, def, xcor, ycor;
+    public char displayChar;
 
     abstract void attack();
 

@@ -15,7 +15,7 @@ public class Game{
 	map = new Map(25, 30, randGen);
 	player.setSpawn(map.lengthX, map.lengthY);
 	spawnEnemies();
-	map.setPlayerPos(player.xcor, player.ycor);
+	map.setPos(player.xcor, player.ycor, player.displayChar);
     }
 
       public Game(Random randgen){
@@ -35,7 +35,7 @@ public class Game{
     //"You can't go there!" message.
     public void interpret(String command){
 	switch(command){
-	case "yes": if(map.saveChar == 'S'){map = new Map(20,30,player,randGen); spawnEnemies();} break;
+	case "yes": if(map.saveChar == 'S'){map = new Map(20,30,randGen); spawnEnemies();} break;
 	default: map.interpret(command);
 	}
     }

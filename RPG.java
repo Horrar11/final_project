@@ -70,10 +70,9 @@ public class RPG{
 	    }
 	}
 	game.map.clear();
-	game.map.setXY(game.player.xcor,game.player.ycor);
-	game.map.setPlayerPos();
+	game.map.setPos(game.player.xcor, game.player.ycor, game.player.displayChar);
 	for (int i = 0; i < game.enemies.length; i++){
-	    game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
+	    game.map.setPos(game.enemies[i].xcor, game.enemies[i].ycor, game.enemies[i].displayChar);
 	}
 	switch(command){
 	case "help": System.out.println(help);

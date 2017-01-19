@@ -13,10 +13,9 @@ public class Game{
 	randGen = new Random();
 	player = new Character();
 	map = new Map(20, 30, player, randGen);
-	player.setSpawn(20, 30);
 	map.setXY( map.lengthX / 2, map.lengthX / 2);
-	spawnEnemies();
-	map.setPlayerPos();
+	//spawnEnemies();
+	//map.setPlayerPos();
     }
 
       public Game(Random randgen){
@@ -45,8 +44,15 @@ public class Game{
     public void spawnEnemies(){
 	enemies = new Enemy[randGen.nextInt(10)+1];
 	for (int i = 0; i < enemies.length; i++){
-	    enemies[i] = new Enemy(randGen.nextInt(Math.abs(map.lengthX - 2) + 1),randGen.nextInt(Math.abs(map.lengthY - 2) + 1));
+	    //spawns enemies at a random spot on the map
+	    enemies[i] = spawnEnemy();
 	}
+    }
+
+    //going to loop itself if it cannot be placed in the random spot(not done yet)
+    public Enemy spawnEnemy() throws IllegalStateException{
+	Enemy x = new Enemy(randGen.nextInt(Math.abs(map.lengthX - 2) + 1), randGen.nextInt(Math.abs(map.lengthY - 2) + 1));
+	return x;
     }
     
     //should print out all the nessecary information

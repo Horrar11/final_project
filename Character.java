@@ -7,7 +7,7 @@ public class Character extends Unit{
     
     //basic character trope
     public Character(){
-	hp = 100.00;
+	hp = 100;
 	atk = 10;
 	weapon = "sword";
 	//weapon = inv.getWeapon();

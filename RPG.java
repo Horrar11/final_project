@@ -4,6 +4,7 @@ public class RPG{
     //contains all the data
     private static Game game;
     private static String prompt;
+    
     private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
     private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
     private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
@@ -44,7 +45,7 @@ public class RPG{
 
     //chooses the proper UI 
     private static void displayUI(){
-	//gives the proper display of commands based on position
+	/*gives the proper display of commands based on position
 	if(game.map.saveChar == 'S'){
 	    System.out.print(stairs);
 	}
@@ -55,6 +56,7 @@ public class RPG{
 	    System.out.print(shopUI);
 	}
 	else {System.out.print(standardUI);}
+	*/
     }
 
     
@@ -72,7 +74,7 @@ public class RPG{
 	//moves all the enemies
 	for (int i = 0; i < game.enemies.length; i++){
 	    int direction = randGen.nextInt(4);
-	    if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
+	    if(game.map.notOccupied(direction, game.enemies[i].cords[0], game.enemies[i].cords[1])){
 		game.enemies[i].move(direction);
 	    }
 	}
@@ -80,7 +82,7 @@ public class RPG{
 	game.map.clear();
 	game.map.setPlayerPos();
 	for (int i = 0; i < game.enemies.length; i++){
-	    game.map.setEnemyPos(game.enemies[i].xcor, game.enemies[i].ycor);
+	    game.map.setEnemyPos(game.enemies[i].cords[0], game.enemies[i].cords[1]);
 	}
 	switch(command){
 	case "help": System.out.println(help);

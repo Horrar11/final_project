@@ -44,11 +44,11 @@ public class Map{
 
 	
     //puts a 'P' on the map wherever the player is
-    public void setPlayerPos(){grid[player.xcor][player.ycor] = 'P';}
+    public void setPlayerPos(){grid[player.cords[0]][player.cords[1]] = 'P';}
 	
     //puts a 'E' on the map wherever an enemy is
     public void setEnemyPos(int x, int y){grid[x][y] = 'E';}
-	
+    
     //this method is a helper method for makeLand() and restoreLand()
     public void setXY(int x, int y){
 	player.setXY(x,y);
@@ -76,7 +76,8 @@ public class Map{
     public void mOOB(){
 	System.out.println("\t\t\tYou cannot go there!");
     }
-	
+
+    /*this should be irrelevant for my moving system
     public void makeLand(){grid[player.xcor][player.ycor] = saveChar;}
 	
     public boolean restoreLand(){
@@ -86,11 +87,13 @@ public class Map{
 	    saveChar = grid[player.xcor][player.ycor];
 	    return false;
 	}
-    }
+	}
+    */
 	
     public boolean interpret(String arg){
 	String given = arg;
 	switch(given){
+	    /*going to redo moving
 	case "w":
 	    try{
 		makeLand();
@@ -148,6 +151,7 @@ public class Map{
 		return false;
 	    } break;
 	case "":break;
+	    */
 	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 	}
 	return true;}

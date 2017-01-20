@@ -11,6 +11,7 @@ public class RPG{
     private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack";
     private static final String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
     private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
+    
     public static Random randGen;
     
 
@@ -21,18 +22,21 @@ public class RPG{
 	    System.out.println(start);
 	    System.exit(1);
 	}
-	if(args.length > 0){
+	if(args.length > 0 && args[0].equals("random")){
 	    randGen = new Random(Integer.parseInt(args[0]));
 	    game = new Game(randGen);
 	}else{
 	    game = new Game();
 	}
 	clearScreen();
+	//lets player enter their desired name
+	System.out.println("Seed: " );
 	System.out.print("Hello adventurer, what would you like to be called?\nEnter your name>");
 	Scanner toPrompt = new Scanner(System.in);
 	prompt = toPrompt.nextLine();
 	prompt += "> ";
 	game.name= prompt;
+	//game loop begins
 	while(game.getAlive()){
 	    routine();
 	}
@@ -64,13 +68,13 @@ public class RPG{
     private static void routine(){	
 	//game's toString prints out map
 	System.out.print(game);
+	//feels a bit unecessary to me
 	displayUI();
 	//gets the command that the player types in
 	System.out.print("\t" + prompt);	
 	Scanner console = new Scanner(System.in);
 	String command = console.nextLine();
 	command = command.toLowerCase();
-	clearScreen();
 	//moves all the enemies
 	for (int i = 0; i < game.enemies.length; i++){
 	    int direction = randGen.nextInt(4);
@@ -79,10 +83,11 @@ public class RPG{
 	    }
 	}
 	//refreshes the map
+	clearScreen();
 	game.map.clear();
-	game.map.setPlayerPos();
+	game.map.setPlayerPos(game.player);
 	for (int i = 0; i < game.enemies.length; i++){
-	    game.map.setEnemyPos(game.enemies[i].cords[0], game.enemies[i].cords[1]);
+	    game.map.setEnemyPos(game.enemies[i].cords[0], game.enemies[i].cords[1], 'E');
 	}
 	switch(command){
 	case "help": System.out.println(help);

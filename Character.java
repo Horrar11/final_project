@@ -10,6 +10,7 @@ public class Character extends Unit{
 	hp = 100;
 	atk = 10;
 	weapon = "sword";
+	cords = new int[2];
 	//weapon = inv.getWeapon();
 	//inv = new Inventory();
     }
@@ -27,4 +28,8 @@ public class Character extends Unit{
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
     */
+
+    public String toString(){
+	return "player";
+    }
 }

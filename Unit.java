@@ -27,6 +27,7 @@ public abstract class Unit{
 
     //convience
     public void setXY(int x, int y){
+	System.out.println( x + "   " + y);
 	cords[0] = x;
 	cords[1] = y;
     }

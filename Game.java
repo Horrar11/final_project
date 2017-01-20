@@ -12,13 +12,13 @@ public class Game{
     public Game(){
 	randGen = new Random();
 	player = new Character();
-	map = new Map(20, 30, player, randGen);
-	map.setXY( map.lengthX / 2, map.lengthX / 2);
+	map = new Map(20, 30, randGen);
+	player.setXY(map.lengthX / 2, map.lengthX / 2);
 	//spawnEnemies();
 	//map.setPlayerPos();
     }
 
-      public Game(Random randgen){
+    public Game(Random randgen){
 	this();
 	this.randGen = randgen;
 	
@@ -29,13 +29,40 @@ public class Game{
 	return player.getAlive();
     }
     
-    //sends command over to map to see if the map can place
-    //the player in the place he wants to go, if not then 
-    //nothing happens and the player recieves a
-    //"You can't go there!" message.
+    //
     public void interpret(String command){
 	switch(command){
-	case "yes": if(map.saveChar == 'S'){map = new Map(20,30,player,randGen); spawnEnemies();} break;
+	    //checks to see if new floor should be generated
+	case "yes": if(map.saveChar == 'S'){
+		map = new Map(20, 30, randGen);
+		spawnEnemies();
+	    }
+	    break;
+	case "w": try{
+		map.notOccupied(0, player.cords[0], player.cords[1]);
+	    }catch(ArrayIndexOutOfBoundsException e){
+		System.out.println(e.getMessage());
+		return;
+	    }
+	    player.move(0);
+	case "d": try{
+		map.notOccupied(1, player.cords[0], player.cords[1]);
+	    }catch(ArrayIndexOutOfBoundsException e){
+		System.out.println(e.getMessage());
+		return;
+	    }
+	case "s": try{
+		map.notOccupied(2, player.cords[0], player.cords[1]);
+	    }catch(ArrayIndexOutOfBoundsException e){
+		System.out.println(e.getMessage());
+		return;
+	    }
+	case "a": try{
+		map.notOccupied(3, player.cords[0], player.cords[1]);
+	    }catch(ArrayIndexOutOfBoundsException e){
+		System.out.println(e.getMessage());
+		return;
+	    }
 	default: map.interpret(command);
 	}
     }

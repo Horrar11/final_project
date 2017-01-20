@@ -7,14 +7,12 @@ public class Map{
     public char saveChar = ' ';
     public int lengthX, lengthY;
     public int stairX, stairY;
-    public Character player;
     public Random randGen;
 
 
     //sets up the border of the map and randomly places the player
-    public Map(int row, int col, Character player,Random randGen){
+    public Map(int row, int col, Random randGen){
 	this.randGen = randGen;
-	this.player = player;
 	grid = new char[row][col];
 	lengthX = row;
 	lengthY = col;
@@ -44,39 +42,24 @@ public class Map{
 
 	
     //puts a 'P' on the map wherever the player is
-    public void setPlayerPos(){grid[player.cords[0]][player.cords[1]] = 'P';}
+    public void setPlayerPos(Character player){grid[player.cords[0]][player.cords[1]] = player.toString().charAt(0);}
 	
     //puts a 'E' on the map wherever an enemy is
-    public void setEnemyPos(int x, int y){grid[x][y] = 'E';}
-    
-    //this method is a helper method for makeLand() and restoreLand()
-    public void setXY(int x, int y){
-	player.setXY(x,y);
-    }
+    public void setEnemyPos(int x, int y, char a){grid[x][y] = a;}
 
     //prints out the map
     public String toString(){
 	String toRet = "";
-	for(int row = 0;row < grid.length;row++){
-	    for(int col = 0;col < grid[row].length;col++){
+	for(int row = 0; row < grid.length; row++){
+	    for(int col = 0; col < grid[row].length; col++){
 		toRet += grid[row][col];
 	    }
 	    toRet += "\n";
 	}
 	return toRet;
     }
-	
-    public class InvalidAreaException extends Exception{
-	public InvalidAreaException(){}
-	public InvalidAreaException(String message){
-	    super(message);
-	}
-    }
-	
-    public void mOOB(){
-	System.out.println("\t\t\tYou cannot go there!");
-    }
 
+    
     /*this should be irrelevant for my moving system
     public void makeLand(){grid[player.xcor][player.ycor] = saveChar;}
 	
@@ -89,84 +72,53 @@ public class Map{
 	}
 	}
     */
-	
+
+
+
+    
     public boolean interpret(String arg){
 	String given = arg;
 	switch(given){
-	    /*going to redo moving
-	case "w":
-	    try{
-		makeLand();
-		player.xcor --;
-		if(restoreLand()){
-		    throw new InvalidAreaException();
-		}
-		setPlayerPos();
-	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-		player.xcor ++;
-		mOOB();
-		setPlayerPos();
-		return false;
-	    } break;
-	case "a":
-	    try{
-		makeLand();
-		player.ycor --;
-		if(restoreLand()){
-		    throw new InvalidAreaException();
-		}
-		setPlayerPos();
-	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-		player.ycor ++;
-		mOOB();
-		setPlayerPos();
-		return false;
-	    } break;
-	case "s":
-	    try{
-		makeLand();
-		player.xcor ++;
-		if(restoreLand()){
-		    throw new InvalidAreaException();
-		}
-		setPlayerPos();
-	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-		player.xcor --;
-		mOOB();
-		setPlayerPos();
-		return false;
-	    } break;
-	case "d":
-	    try{
-		makeLand();
-		player.ycor ++;
-		if(restoreLand()){
-		    throw new InvalidAreaException();
-		}
-		setPlayerPos();
-	    } catch (ArrayIndexOutOfBoundsException|InvalidAreaException e){
-		player.ycor --;
-		mOOB();
-		setPlayerPos();
-		return false;
-	    } break;
-	case "":break;
-	    */
 	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 	}
 	return true;}
-	
-	
-	
-    public boolean notOccupied(int dir, int x, int y){
+
+
+
+
+    
+    //generic error for invalid movements to make code neater
+    public void mOOB(String input) throws ArrayIndexOutOfBoundsException{
+	throw new ArrayIndexOutOfBoundsException(input);
+    }
+
+
+
+    
+    //checks to see if the movement is valid
+    public boolean notOccupied(int dir, int x, int y) throws ArrayIndexOutOfBoundsException{
 	switch(dir){
-	case 0: if(grid[x-1][y] == ' ' || grid[x-1][y] == 'X'){return true;} break;
-	case 1: if(grid[x+1][y] == ' ' || grid[x+1][y] == 'X'){return true;} break;
-	case 2: if(grid[x][y-1] == ' ' || grid[x][y-1] == 'X'){return true;} break;
-	case 3: if(grid[x][y+1] == ' ' || grid[x][y+1] == 'X'){return true;} break;
+	case 0: if(grid[x - 1][y] == ' '){
+		return true;
+	    }else{
+		mOOB("Invalid Movement Up");
+	    }
+	case 1: if(grid[x][y + 1] == ' '){
+		return true;
+	    }else{
+		mOOB("Invalid Movement Right");
+	    }
+	case 2: if(grid[x + 1][y] == ' '){
+		return true;
+	    }else{
+		mOOB("Invalid Movement Down");
+	    }
+	case 3: if(grid[x][y - 1] == ' '){
+		return true;
+	    }else{
+		mOOB("Invalid Movement Down");
+	    }
 	default: return false;
 	}
-		
-	return false;
     }
 }

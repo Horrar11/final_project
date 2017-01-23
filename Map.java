@@ -11,8 +11,8 @@ public class Map{
 
 
     //sets up the border of the map and randomly places the player
-    public Map(int row, int col, Random randGen){
-	this.randGen = randGen;
+    public Map(int row, int col, long seed){
+	this.randGen = new Random(seed);
 	grid = new char[row][col];
 	lengthX = row;
 	lengthY = col;
@@ -119,6 +119,15 @@ public class Map{
 		mOOB("Invalid Movement Down");
 	    }
 	default: return false;
+	}
+    }
+
+    //checks the one spot without direction
+    public boolean notOccupied2(int x, int y) {
+	if(grid[x][y] == ' '){
+	    return true;
+	}else{
+	    return false;
 	}
     }
 }

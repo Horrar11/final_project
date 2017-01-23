@@ -12,22 +12,28 @@ public class Map{
 
     //sets up the border of the map and randomly places the player
     public Map(int row, int col, long seed){
+	//unified randgen
 	this.randGen = new Random(seed);
 	grid = new char[row][col];
 	lengthX = row;
 	lengthY = col;
+	//generates the map
 	for(int i = 0;i < row;i++){
 	    for(int ind = 0;ind < col;ind++){
+		//checks to see if it's the border or not
 		grid[i][ind] = ' ';
 		if(i == 0 || ind == 0 || i == row -1 || ind == col -1){
 		    grid[i][ind] = '#';
 		}
-		stairX = Math.abs(randGen.nextInt(row - 2)) + 1;
-		stairY = Math.abs(randGen.nextInt(col - 2)) + 1;
-		grid[stairX][stairY] = 'S';
 	    }
 	}
+	//generates the stairs
+	stairX = randGen.nextInt(row - 2) + 1;
+	stairY = randGen.nextInt(col - 2) + 1;
+	grid[stairX][stairY] = 'S';
     }
+
+    //resets the map to a clean slate (no Player or enemy plots)
     public void clear(){
 	for(int i = 0;i < lengthX;i++){
 	    for(int ind = 0;ind < lengthY;ind++){
@@ -44,7 +50,7 @@ public class Map{
     //puts a 'P' on the map wherever the player is
     public void setPlayerPos(Character player){grid[player.cords[0]][player.cords[1]] = player.toString().charAt(0);}
 	
-    //puts a 'E' on the map wherever an enemy is
+    //puts a 'E' or corresponding letter on the map wherever an enemy is
     public void setEnemyPos(int x, int y, char a){grid[x][y] = a;}
 
     //prints out the map
@@ -76,12 +82,12 @@ public class Map{
 
 
     
-    public boolean interpret(String arg){
+    public void interpret(String arg){
 	String given = arg;
 	switch(given){
 	default: System.out.println("404 command not found.\nTry typing help for\na list of available commands.");
 	}
-	return true;}
+    }
 
 
 
@@ -98,22 +104,22 @@ public class Map{
     //checks to see if the movement is valid
     public boolean notOccupied(int dir, int x, int y) throws ArrayIndexOutOfBoundsException{
 	switch(dir){
-	case 0: if(grid[x - 1][y] == ' '){
+	case 0: if(grid[x - 1][y] == ' ' || grid[x - 1][y] == 'S' ){
 		return true;
 	    }else{
 		mOOB("Invalid Movement Up");
 	    }
-	case 1: if(grid[x][y + 1] == ' '){
+	case 1: if(grid[x][y + 1] == ' ' ||grid[x][y + 1] == 'S'){
 		return true;
 	    }else{
 		mOOB("Invalid Movement Right");
 	    }
-	case 2: if(grid[x + 1][y] == ' '){
+	case 2: if(grid[x + 1][y] == ' ' || grid[x + 1][y] == 'S'){
 		return true;
 	    }else{
 		mOOB("Invalid Movement Down");
 	    }
-	case 3: if(grid[x][y - 1] == ' '){
+	case 3: if(grid[x][y - 1] == ' ' || grid[x][y - 1] == 'S'){
 		return true;
 	    }else{
 		mOOB("Invalid Movement Down");

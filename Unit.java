@@ -39,4 +39,8 @@ public abstract class Unit{
 	hp -= a;
 	return true;
     }
+
+    public String toString(){
+	return "Unit"
+    }
 }

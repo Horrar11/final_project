@@ -8,7 +8,7 @@ public class RPG{
     private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
     private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
     private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
-    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse a non-number in place of seed for a random seed /nUse wasd to move and ijkl to attack";
+    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse a non-number in place of seed for a random seed /nUse wasd to move /nUse \"yes\" to go to the next floor once you reached the stirs";
     private static final String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
     private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
     
@@ -71,7 +71,7 @@ public class RPG{
     
     //loop that continously runs
     private static void routine(){	
-	//refreshes the map
+	//refreshes the map (gets rid of old map and replots the new points)
 	clearScreen();
 	game.map.clear();
 	game.map.setPlayerPos(game.player);
@@ -85,18 +85,17 @@ public class RPG{
 	Scanner console = new Scanner(System.in);
 	String command = console.nextLine();
 	command = command.toLowerCase();
-	
+	//this processes what the player wants
 	switch(command){
 	case "help": System.out.println(help);
 	    break;
 	default: game.interpret(command);
 	}
-	displayUI();
-	
 	//moves all the enemies
 	for (int i = 0; i < game.enemies.length; i++){
 	    int direction = randGen.nextInt(4);
 	    boolean boo = false;
+	    //same movement system as the player, but it doesn't do anything with the exception
 	    try{
 	        boo = game.map.notOccupied(direction, game.enemies[i].cords[0], game.enemies[i].cords[1]);
 	    }catch(ArrayIndexOutOfBoundsException e){

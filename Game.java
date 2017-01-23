@@ -8,10 +8,12 @@ public class Game{
     public static String name;
     public static Random randGen;
 
-
+    //game has to run with a parameter
     public Game(long seed){
 	this.randGen = new Random(seed);
+	//passes seed to map as well so that randgen is unified
 	map = new Map(20, 30, seed);
+	//generates character and centers him
 	player = new Character();
 	player.setXY(map.lengthX / 2, map.lengthY / 2);
 	spawnEnemies();
@@ -26,11 +28,12 @@ public class Game{
     public void interpret(String command){
 	switch(command){
 	    //checks to see if new floor should be generated
-	case "yes": if(map.saveChar == 'S'){
+	case "yes": if(player.cords[0] == map.stairX && player.cords[1] == map.stairY){
 		map = new Map(20, 30, randGen.nextInt(1000000));
 		spawnEnemies();
 	    }
 	    break;
+	    //checks to see if the place you're moving to is empty/stairs then it moves you
 	case "w": try{
 		map.notOccupied(0, player.cords[0], player.cords[1]);
 	    }catch(ArrayIndexOutOfBoundsException e){

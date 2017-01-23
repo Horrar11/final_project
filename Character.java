@@ -19,17 +19,7 @@ public class Character extends Unit{
     public void attack(){}
 
 
-    /*
-     *don't think this is necessary, but I'm just commenting in case I do need it later
-    public void setXY(int x, int y){
-	xcor = x;
-	ycor = y;
-    }
-    public boolean inRangeEnemy(){return false;}
-    public boolean inRangeShop(){return false;}
-    */
-
     public String toString(){
-	return "player";
+	return "Player";
     }
 }

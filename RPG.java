@@ -4,12 +4,11 @@ public class RPG{
     //contains all the data
     private static Game game;
     private static String prompt;
-    private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender";
-    private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys";
-    private static final String standardUI = "Move around with W-A-S-D keys\nAccess your items through INVENTORY";
-    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse \"random\" in place of seed for a random seed /nUse wasd to move and ijkl to attack";
-    private static final String help = "help\nHere is a list of Available Commands:\nhelp - displays help (a.k.a. this)\nw - move up\na - move left\ns - move down\nd - move right\n";
-    private static final String stairs = "Would you like to go down the stairs?\nYes\tNo";
+    private static final String fightUI = "An enemy is in range!\nFight\tItem\nSuicide\tSurrender\n";
+    private static final String shopUI = "Shopkeeper> Oh, hello there!\nBuy\tSell\tForge\nLeave via the W-A-S-D keys\n";
+    private static final String standardUI = "Move around with W-A-S-D keys\nMove to the S on the map to \nGet to the next floor!\n";
+    private static final String start = "Welcome to LKBFCW's Terminal based RPG \nThis game should be ran with the following parameters with the ones in [] being optional \n\tjava RPG [seed] \nUse \"random\" in place of seed for a random seed \nUse wasd to move and pick up $$$";
+    private static final String stairs = "Would you like to go down the stairs?\nYes\tNo(Leave via the W-A-S-D keys)\n";
     public static Random randGen;
     
 
@@ -21,10 +20,9 @@ public class RPG{
 	    System.exit(1);
 	}
 	if(args.length > 0){
-	    randGen = new Random(Integer.parseInt(args[0]));
-	    game = new Game(randGen);
-	}else{
-	    game = new Game();
+		int seed = Integer.parseInt(args[0]);
+	    randGen = new Random(seed);
+	    game = new Game(seed);
 	}
 	clearScreen();
 	System.out.print("Hello adventurer, what would you like to be called?\nEnter your name>");
@@ -35,18 +33,25 @@ public class RPG{
 	while(game.getAlive()){
 	    routine();
 	}
+	System.out.println("YOU HAVE DIED " + prompt + "!!!\nTHERE IS ONLY ONE ESCAPE FROM \nBEING SUCK INSIDE THIS MATRIX FOREVER...\nYOUR SCORE WAS: " + game.score + "\nTO PLAY AGAIN RUN THE GAME AGAIN.");
     }
 
+	
     //clears screen
     private static void clearScreen(){
 	System.out.println("\033[2J\033[;H");
     }
 
+	
     //loop that continously runs
-    private static void routine(){	
-	//game's toString prints out map
+	
+    private static void routine(){
+	System.out.println();
+	System.out.println("Floor " + (game.floorMultiplier + 1));
+	System.out.println();
 	System.out.print(game);
-	//gives the proper display of commands based on position
+	System.out.println((int)game.player.hp + " / " + (int)game.player.maxhp);
+	System.out.println((int)game.player.mp + " / " + (int)game.player.maxmp);
 	if(game.map.saveChar == 'S'){
 	    System.out.print(stairs);
 	}
@@ -57,26 +62,19 @@ public class RPG{
 	    System.out.print(shopUI);
 	}
 	else {System.out.print(standardUI);}
+	
+	
 	//gets the command that the player types in
+	
 	System.out.print("\t" + prompt);	
 	Scanner console = new Scanner(System.in);
 	String command = console.nextLine();
 	command = command.toLowerCase();
+	
+	
 	clearScreen();
-	for (int i = 0; i < game.enemies.length; i++){
-	    int direction = randGen.nextInt(4);
-	    if(game.map.notOccupied(direction, game.enemies[i].xcor, game.enemies[i].ycor)){
-		game.enemies[i].move(direction);
-	    }
-	}
-	game.map.clear();
-	game.map.setPos(game.player.xcor, game.player.ycor, game.player.displayChar);
-	for (int i = 0; i < game.enemies.length; i++){
-	    game.map.setPos(game.enemies[i].xcor, game.enemies[i].ycor, game.enemies[i].displayChar);
-	}
-	switch(command){
-	case "help": System.out.println(help);
-	default: game.interpret(command);
+	//System.out.println("clearedScreen!");
+	game.interpret(command);
+	game.moveAll();
 	}
     }
-}

@@ -1,6 +1,6 @@
 import java.util.Random;
 public class Character extends Unit{
-    public double hp,mp;
+    public double hp,mp, maxhp, maxmp;
     public int atk, def, dex, vit, wis, xcor, ycor;
     public String weapon;
     public int seed;
@@ -9,6 +9,8 @@ public class Character extends Unit{
     public Character(int seed){
 	hp = 100.00;
 	mp = 100.00;
+	maxhp = 100.00;
+	maxmp = 100.00;
 	atk = 10;
 	def = 0;
 	dex = 10;
@@ -20,6 +22,8 @@ public class Character extends Unit{
 	//inv = new Inventory();
     }
     
+	public boolean getAlive(){return hp >= 0.00;}
+	
     public void setSpawn(int row, int col){
 	Random rand = new Random(seed);
 		xcor = rand.nextInt(Math.abs(row - 2) + 1);
@@ -34,4 +38,3 @@ public class Character extends Unit{
     public boolean inRangeEnemy(){return false;}
     public boolean inRangeShop(){return false;}
     }
-} 
